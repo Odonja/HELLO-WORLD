@@ -1,8 +1,20 @@
-node{
-    stage('SCM Checkout'){
-        git 'https://github.com/Odonja/HELLO-WORLD'
-    }
-    stage('Compile-Package'){
-        sh 'mvn package'
+pipeline {
+    agent any
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                   '''
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
     }
 }
